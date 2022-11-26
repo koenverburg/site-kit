@@ -1,28 +1,43 @@
+import Link from 'next/Link'
 import Layout from '../components/Layout'
+import styles from '../styles/kit.module.scss'
+import {kits} from '../data/kits'
 
-const IndexPage = () => {
-  const list = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+export async function getStaticProps(_context: unknown) {
+  return {
+    props: {
+      kits
+    }
+  }
+}
 
+const Kit = ({name, slug, products}) => {
+  return (
+    <Link
+      href={`/kit/${slug}`}
+      className={`shadow-md ${styles.kit}`}
+      style={{ backgroundImage: `url(https://place-hold.it/200)` }}
+    >
+      <div className={styles.kit_content}>
+        <h3 className="z-10 text-xl font-bold tracking-tight text-white">{name}</h3>
+        <span className="z-20 text-white">{products.length} Products</span>
+      </div>
+    </Link>
+  )
+}
+
+const IndexPage = ({kits}) => {
   return (
     <Layout title="Conrad The Programmer - Template">
-
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-
-        {list.map(key => (
-          <div key={key} className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-
-            <a href="#">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-            </a>
-
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-
-            <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
-              Read more
-            </a>
-          </div>
+        {kits.map(k => (
+          <Kit
+            key={k.name}
+            name={k.name}
+            slug={k.slug}
+            products={k.products}
+          />
         ))}
-
       </div>
     </Layout>
   )

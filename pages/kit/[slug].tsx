@@ -1,38 +1,36 @@
 import Layout from '../../components/Layout'
-import {kits} from '../../data/kits'
-import {promises as fs} from 'fs'
-import path from 'path'
+import { kits } from '../../data/kits'
+import { ProductCard } from '../../components/product'
+import { getOGImage } from '../../utils'
+import client from 'https'
 
 export async function getStaticPaths() {
   const paths = kits.map(kit => ({
     params: { slug: kit.slug },
   }))
 
-  // const droppath = path.resolve(__dirname, '../../../../')
-  // await fs.writeFile(`${droppath}/kits.json`, JSON.stringify(kits, null, 2))
-
   return { paths, fallback: false }
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
   const kit = kits.find(k => k.slug === params.slug)
+
+  // const links = kit.products.map(p => p.links).flat()
+  // const coolblueLinks = links.filter(l => l.storeName.toLowerCase() === 'coolblue')
+  //
+  // const images = await Promise.allSettled(coolblueLinks.map(async l => await getOGImage(l.link)))
 
   return {
     props: { kit }
   }
 }
 
-const IndexPage = ({kit}) => {
-  console.log(kit)
+const IndexPage = ({ kit }) => {
   return (
     <Layout title="Conrad The Programmer - Template">
+      <h1>{kit.name}</h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        <h1>{kit.name}</h1>
-        <ul>
-          {kit.products.map(product => (
-            <li>{product.name}</li>
-          ))}
-        </ul>
+        {kit.products.map(product => <ProductCard key={product.name} product={product} />)}
       </div>
     </Layout>
   )

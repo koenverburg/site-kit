@@ -5,7 +5,7 @@ export const Navbar = () => {
 
       <div className="container flex flex-wrap items-center justify-between mx-auto">
 
-        <a href="#" className="flex items-center">
+        <a href="/" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">Conrad The Programmer</span>
         </a>
 

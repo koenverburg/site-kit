@@ -7,7 +7,7 @@
     "export": "next export -o dist",
     "type-check": "tsc",
     "build:kits": "node ./scripts/generate-kits/build.js",
-    "generate:kits": "node ./bin/kits.js"
+    "generate:kits": "node ./bin/kits.mjs"
   },
   "dependencies": {
     "next": "latest",

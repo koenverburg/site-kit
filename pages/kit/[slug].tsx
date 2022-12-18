@@ -1,8 +1,8 @@
 import Layout from '../../components/Layout'
-import { kits } from '../../data/kits'
+import kits from '../../data.json'
 import { ProductCard } from '../../components/product'
-import { getOGImage } from '../../utils'
-import client from 'https'
+// import { getOGImage } from '../../utils'
+// import client from 'https'
 
 export async function getStaticPaths() {
   const paths = kits.map(kit => ({

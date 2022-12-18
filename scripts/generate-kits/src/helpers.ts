@@ -34,7 +34,7 @@ const download = async (link, destination): Promise<void> => {
   await fs.promises.writeFile(destination, buffer);
 }
 
-const getFilePath = (title: string) => `./public/products/${slugify(title)}.png`;
+const getFilePath = (title: string) => `./public/static/products/${slugify(title)}.png`;
 
 export const getViaLauncher = async (url: string) => {
   const { page, browser } = await launcher({ headless: true, url })
@@ -70,19 +70,19 @@ export const getViaLauncher = async (url: string) => {
   return filepath;
 }
 
-export const createLink = async ({ link, storeName, storeColor }: Omit<Link, 'image'>): Promise<Link> => {
+export const createLink = ({ link, storeName, storeColor }: Link): Link => {
   return {
-    image: await getViaLauncher(link),
     link,
     storeName,
     storeColor
   }
 }
 
-export const createProduct = ({ name, links }: Product): Product => {
+export const createProduct = async (link: string, product: Omit<Product, 'image'>): Promise<Product> => {
   return {
-    name,
-    links
+    image: link !== '' ? await getViaLauncher(link) : 'https://place-hold.it/200',
+    name: product.name,
+    links: product.links
   }
 }
 

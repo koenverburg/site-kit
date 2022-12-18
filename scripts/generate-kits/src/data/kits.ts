@@ -94,25 +94,25 @@ const cl = createLink
 const homelab = ck({
   name: "Homelab",
   products: [
-    cp({
+    await cp("https://www.coolblue.nl/product/836200/raspberry-pi-4-model-b-4gb.html", {
       name: "Raspberry PI B3",
       links: [
-        await cl({
+        cl({
           link: "https://www.coolblue.nl/product/836200/raspberry-pi-4-model-b-4gb.html",
           ...coolblue,
         }),
       ],
     }),
-    cp({
+    await cp("https://www.amazon.com/GeeekPi-Raspberry-2GB-Starter-Kit/dp/B0B7DFF7TY?keywords=raspberry+pi&qid=1670774804&sprefix=raspb%2Caps%2C158&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzOTk0NFAzODlaN1UzJmVuY3J5cHRlZElkPUEwMzE0NDI4MUZTWkhPRDlEWjc5UiZlbmNyeXB0ZWRBZElkPUEwOTA5OTIxMldGS0VLVVRURVJSRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU%3D&linkCode=ll1&tag=conradsventur-20&linkId=47d401f378cae7f1e591179270f7d07d&language=en_US&ref_=as_li_ss_tl", {
       name: "Raspberry PI 2",
       links: [
-        await cl({
+        cl({
           link: "https://www.amazon.com/GeeekPi-Raspberry-2GB-Starter-Kit/dp/B0B7DFF7TY?keywords=raspberry+pi&qid=1670774804&sprefix=raspb%2Caps%2C158&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzOTk0NFAzODlaN1UzJmVuY3J5cHRlZElkPUEwMzE0NDI4MUZTWkhPRDlEWjc5UiZlbmNyeXB0ZWRBZElkPUEwOTA5OTIxMldGS0VLVVRURVJSRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU%3D&linkCode=ll1&tag=conradsventur-20&linkId=47d401f378cae7f1e591179270f7d07d&language=en_US&ref_=as_li_ss_tl",
           ...amazon,
         }),
       ],
     }),
-    cp({
+    await cp("", {
       name: "Old PC Running Ubuntu",
       links: [],
     }),

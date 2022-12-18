@@ -1,30 +1,38 @@
-
-import styles from '../styles/kit.module.scss'
+import Image from 'next/image'
+import styles from '../styles/product-card.module.scss'
 
 import { Product } from "../data/types"
-import { useOGImage } from '../utils'
 
 type Props = {
   product: Product
   image: any
 }
 
-export const ProductCard = ({ product, image }: Props) => {
-  let bg = 'https://place-hold.it/200'
-
+export const ProductCard = ({ product }: Props) => {
   return (
-    <div>
-      <div
-        className={`shadow-md ${styles.kit}`}
-        style={{ backgroundImage: `url(${bg})` }}
-      >
-        <div className={styles.kit_content}>
+    <div className={`${styles.productCard}`}>
+      <div className={`shadow-md ${styles.productCard_image}`}>
+        <Image
+          fill
+          alt={product.name}
+          src={product.image.replace('./public', '')}
+          className="object-center object-cover absolute"
+        />
+        <div className={styles.productCard_content}>
           <h3 className="z-10 text-xl font-bold tracking-tight text-white">{product.name}</h3>
         </div>
       </div>
 
-      <a>Coolblue</a>
-      <a>Amazon</a>
+      <div>
+        {product.links.map(link => 
+          <a
+            key={link.link}
+            href={link.link}
+            style={{ backgroundColor: link.storeColor }}
+            className={`${styles.productCard_button}`}
+          >{link.storeName}</a>
+        )}
+      </div>
 
     </div>
   )

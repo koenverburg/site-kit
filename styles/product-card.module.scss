@@ -1,10 +1,18 @@
-.kit {
-  height: 200px;
-  padding: 1rem;
-  border-radius: 0.5rem;
-
+.productCard {
   display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.productCard_image {
+  height: 200px;
+  display: flex;
+
+  padding: 1rem;
+  margin-bottom: 2rem;
+
   position: relative;
+  border-radius: 0.5rem;
 
   &:before {
     content: '';
@@ -29,14 +37,22 @@
     background: linear-gradient(to bottom, transparent 0%, #000 100%);
   }
   
-  
   img {
     border-radius: 0.5rem;
   }
 }
 
-.kit_content {
+.productCard_content {
   display: flex;
   align-self: flex-end;
   flex-direction: column;
 }
+
+.productCard_button {
+  color: #fff;
+  background: orange;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+

@@ -1,12 +1,12 @@
 export type Link = {
   link: string
-  image: string
   storeName: string
   storeColor: string
 }
 
 export type Product = {
   name: string
+  image: string
   links: Link[]
 }
 

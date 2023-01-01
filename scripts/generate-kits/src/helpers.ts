@@ -36,7 +36,7 @@ const download = async (link, destination): Promise<void> => {
 
 const getFilePath = (title: string) => `./public/static/products/${slugify(title)}.png`;
 
-export const getViaLauncher = async (url: string) => {
+export const getViaLauncher = async (url: string, name: string) => {
   const { page, browser } = await launcher({ headless: true, url })
   let image: string
   let title: string
@@ -50,9 +50,7 @@ export const getViaLauncher = async (url: string) => {
       .locator('meta[property="og:image"]')
       .getAttribute("content")
     console.log('Found image', image)
-  }
-
-  if (url.includes('amazon.com')) {
+  } else if (url.includes('amazon.com')) {
     title = await page
       .locator('meta[name="title"]')
       .getAttribute("content");
@@ -61,11 +59,17 @@ export const getViaLauncher = async (url: string) => {
 
     title = matches[1]
     image = await page.locator("#landingImage").getAttribute('src')
+  } else {
+    image = await page
+      .locator('meta[property="og:image"]')
+      .getAttribute("content")
+    console.log('Found image', image)
   }
 
   await browser.close()
-  const filepath = getFilePath(title)
+  const filepath = getFilePath(!title ? name : title)
   await download(image, filepath)
+
   console.log("Saved in", filepath)
   return filepath;
 }
@@ -80,7 +84,7 @@ export const createLink = ({ link, storeName, storeColor }: Link): Link => {
 
 export const createProduct = async (link: string, product: Omit<Product, 'image'>): Promise<Product> => {
   return {
-    image: link !== '' ? await getViaLauncher(link) : 'https://place-hold.it/200',
+    image: link !== '' ? await getViaLauncher(link, product.name) : 'https://place-hold.it/200',
     name: product.name,
     links: product.links
   }

@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import styles from '../styles/product-card.module.scss'
 
-import { Product } from "../data/types"
+import type { Product } from "../scripts/generate-kits/src/types"
 
 type Props = {
   product: Product
-  image: any
 }
 
 export const ProductCard = ({ product }: Props) => {

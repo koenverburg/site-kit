@@ -29,7 +29,6 @@
     background: linear-gradient(to bottom, transparent 0%, #000 100%);
   }
   
-  
   img {
     border-radius: 0.5rem;
   }
@@ -39,4 +38,9 @@
   display: flex;
   align-self: flex-end;
   flex-direction: column;
+}
+
+.kit_hero {
+  background-repeat: no-repeat;
+  background-position: center;
 }

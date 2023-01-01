@@ -1,6 +1,6 @@
 import { createKit, createLink, createProduct } from "../helpers"
 import { airpods, iphone } from "./products"
-import { amazon, coolblue } from "./stores"
+import { adidas, amazon, blank, coolblue } from "./stores"
 
 const ck = createKit
 const cp = createProduct
@@ -67,29 +67,30 @@ const cl = createLink
 //   ],
 // });
 
-// const bags = ck({
-//   name: 'Bags',
-//   products: [
-//     cp({
-//       name: 'North face',
-//       links: [
-//         await cl({
-//           link: 'https://coolblue.com/iphone',
-//           ...coolblue
-//         })
-//       ]
-//     }),
-//     cp({
-//       name: 'ISM',
-//       links: [
-//         await cl({
-//           link: 'https://coolblue.com/air-pods',
-//           ...coolblue
-//         })
-//       ]
-//     }),
-//   ]
-// })
+const bags = ck({
+  name: 'Bags',
+  products: [
+    await cp('https://www.adidas.nl/y-3-tech-rugzak/HM8358.html', {
+      name: 'Adidas Y3 Tech backpack',
+      links: [
+        cl({
+          link: 'https://www.adidas.nl/y-3-tech-rugzak/HM8358.html',
+          ...adidas
+        })
+      ]
+    }),
+    await cp('https://ismbags.com/products/backpack', {
+      name: 'ISM',
+      links: [
+        cl({
+          link: 'https://ismbags.com/products/backpack',
+          storeName: 'ISM',
+          ...blank
+        })
+      ]
+    }),
+  ]
+})
 
 const homelab = ck({
   name: "Homelab",
@@ -119,5 +120,5 @@ const homelab = ck({
   ],
 });
 
-export const kits = [homelab] // [edc, edcLight, bags, homelab]
+export const kits = [bags, homelab] // [edc, edcLight, bags, homelab]
 

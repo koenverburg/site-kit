@@ -6,66 +6,31 @@ const ck = createKit
 const cp = createProduct
 const cl = createLink
 
-// const edc = ck({
-//   name: 'EDC (Heavy)',
-//   products: [
-//     iphone,
-//     airpods,
-//     cp({
-//       name: 'RollingSquad Cable (1.5m)',
-//       links: [
-//         await cl({
-//           link: 'https://amazon.com',
-//           ...amazon
-//         })
-//       ]
-//     }),
-//     cp({
-//       name: 'Ottorbox Powerbank',
-//       links: [
-//         await cl({
-//           link: 'https://amazon.com',
-//           ...amazon
-//         })
-//       ]
-//     }),
-//     cp({
-//       name: 'Bose QC35 II',
-//       links: [
-//         await cl({
-//           link: 'https://amazon.com',
-//           ...amazon
-//         })
-//       ]
-//     })
-//   ]
-// })
-
-// const edcLight = ck({
-//   name: "EDC (Light)",
-//   products: [
-//     iphone,
-//     airpods,
-//     cp({
-//       name: "RollingSquad Cable (Key Chain)",
-//       links: [
-//         await cl({
-//           link: "https://amazon.com",
-//           ...amazon,
-//         }),
-//       ],
-//     }),
-//     cp({
-//       name: "ISM Powerbank",
-//       links: [
-//         await cl({
-//           link: "https://amazon.com",
-//           ...amazon,
-//         }),
-//       ],
-//     }),
-//   ],
-// });
+const edc = ck({
+  name: "EDC",
+  products: [
+    await iphone,
+    await airpods,
+    await cp('https://amzn.to/3jx6A3p', {
+      name: "Large Powerbank",
+      links: [
+        cl({
+          link: "https://amzn.to/3jx6A3p",
+          ...amazon,
+        }),
+      ],
+    }),
+    await cp('https://amzn.to/3vxuLS0', {
+      name: 'Bose QC35 II',
+      links: [
+        cl({
+          link: 'https://amzn.to/3vxuLS0',
+          ...amazon
+        })
+      ]
+    })
+  ],
+})
 
 const bags = ck({
   name: 'Bags',
@@ -120,5 +85,5 @@ const homelab = ck({
   ],
 });
 
-export const kits = [bags, homelab] // [edc, edcLight, bags, homelab]
+export const kits = [edc, bags, homelab]
 

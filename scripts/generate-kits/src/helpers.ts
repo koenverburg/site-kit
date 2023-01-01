@@ -21,7 +21,7 @@ const slugify = (title: string): string => {
     .replace(/-+$/, ""); // Trim - from end of text
 }
 
-const download = async (link, destination): Promise<void> => {
+const download = async (link: string, destination: string): Promise<void> => {
   const response = await fetch(link, {
     headers: {
       "User-Agent":
@@ -36,39 +36,53 @@ const download = async (link, destination): Promise<void> => {
 
 const getFilePath = (title: string) => `./public/static/products/${slugify(title)}.png`;
 
+const isCoolblue = (url: string) => url.includes('coolblue.nl') 
+const isAmazon = (url: string) => url.includes('amazon.com') || url.includes('amzn.to') 
+
+const getImage = async (page) => {
+  const landingImage = await page.locator("#landingImage").getAttribute('src')
+  const imgTagWrapper = await page.locator("#imgTagWrapperId").getAttribute('src')
+
+  return landingImage ?? imgTagWrapper
+}
+
 export const getViaLauncher = async (url: string, name: string) => {
+  console.log(url)
+
+  const filepath = getFilePath(name)
+  if (fs.existsSync(filepath)) {
+    return filepath
+  }
+
   const { page, browser } = await launcher({ headless: true, url })
-  let image: string
-  let title: string
+  let image: string | null
 
-  if (url.includes('coolblue.nl')) {
-    title = await page
-    .locator('meta[property="og:title"]')
-    .getAttribute("content");
-    console.log("Found title", title)
+  if (isCoolblue(url)) {
+    console.log('Detected Coolblue')
+
     image = await page
       .locator('meta[property="og:image"]')
       .getAttribute("content")
+
     console.log('Found image', image)
-  } else if (url.includes('amazon.com')) {
-    title = await page
-      .locator('meta[name="title"]')
-      .getAttribute("content");
-    const re = new RegExp(/Amazon\.com\:\s(.*)\-/)
-    const matches = re.exec(title)
+  } else if (isAmazon(url)) {
+    console.log('Detected Amazon')
 
-    title = matches[1]
-    image = await page.locator("#landingImage").getAttribute('src')
-  } else {
+    image = await getImage(page)
+
+    console.log('Found image', image)
+  } else if (!isCoolblue(url) && !isAmazon(url)) {
+    console.log('Detected another site')
+
     image = await page
       .locator('meta[property="og:image"]')
       .getAttribute("content")
+
     console.log('Found image', image)
   }
 
   await browser.close()
-  const filepath = getFilePath(!title ? name : title)
-  await download(image, filepath)
+  await download(image!, filepath)
 
   console.log("Saved in", filepath)
   return filepath;

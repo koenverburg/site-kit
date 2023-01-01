@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import kits from "../../data.json";
 import { ProductCard } from "../../components/product";
-import { Product } from "../../scripts/generate-kits/src/types";
+import type { Product } from "../../scripts/generate-kits/src/types";
 
 export async function getStaticPaths() {
   const paths = kits.map((kit) => ({

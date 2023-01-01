@@ -1,4 +1,4 @@
-import { Kit, Link, Product } from "./types"
+import { Kit, Link, Product } from "../../../shared/types"
 import fs from 'fs'
 import { launcher } from "./launcher"
 

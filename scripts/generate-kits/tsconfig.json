@@ -4,21 +4,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": false,
-    "lib": [
-      "node",
-      "dom",
-      "esnext"
-    ],
+    "lib": ["node", "dom", "esnext"],
     "strict": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": false,
     "outDir": "bin",
     "rootDir": ".",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["../../shared/types.ts"],
+  "exclude": ["node_modules"]
 }

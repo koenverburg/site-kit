@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from '../styles/product-card.module.scss'
 
-import type { Product } from "../scripts/generate-kits/src/types"
+import type { Product } from "../shared/types"
 
 type Props = {
   product: Product

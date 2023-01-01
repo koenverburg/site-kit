@@ -1,6 +1,6 @@
 import Link from 'next/Link'
 import styles from '../styles/kit.module.scss'
-import type { Kit } from "../scripts/generate-kits/src/types"
+import type { Kit } from "../shared/types"
 
 type KitProps = {
   kit: Kit
